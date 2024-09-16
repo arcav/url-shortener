@@ -3,7 +3,7 @@ import "reflect-metadata"
 
 @Entity()
 export class Url {
-  constructor(originalUrl: string, shortUrl: string, clickCount: number = 0 ,fullShortUrl:string) {
+  constructor(originalUrl: string, shortUrl: string, clickCount: number = 0 ) {
     this.originalUrl = originalUrl;
     this.shortUrl = shortUrl;
     this.clickCount = clickCount;
