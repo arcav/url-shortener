@@ -60,7 +60,7 @@ export async function GET() {
   
 
 // Función auxiliar para generar una URL corta (esto es solo un ejemplo)
-export function generateShortUrl() {
+function generateShortUrl() {
   return Math.random().toString(36).substring(2, 8); // Genera un string corto aleatorio
 }
 
