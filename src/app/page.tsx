@@ -1,9 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { GrUpdate } from "react-icons/gr";
-
-
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { GrUpdate } from 'react-icons/gr';
 
 // Define la interfaz para los datos de URL
 interface UrlData {
@@ -89,10 +87,9 @@ export default function Home() {
     };
 
     // Actualiza una URL existente
-     const handleUpdate = async (id: number, newOriginalUrl: string) => {
+    const handleUpdate = async (id: number, newOriginalUrl: string) => {
         try {
             // Primero, genera una nueva URL acortada
-          
 
             // Actualiza la URL original y la URL acortada en la base de datos
             await fetch(`${URL}/url/${id}`, {
@@ -100,7 +97,10 @@ export default function Home() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ originalUrl: newOriginalUrl, shortUrl: shortUrl }),
+                body: JSON.stringify({
+                    originalUrl: newOriginalUrl,
+                    shortUrl: shortUrl,
+                }),
             });
 
             // Cierra el modal y actualiza el estado de las URLs
@@ -109,7 +109,7 @@ export default function Home() {
         } catch (error) {
             console.error('Error al actualizar la URL:', error);
         }
-    }; 
+    };
 
     // Abre el modal para editar una URL
     const openModal = (url: UrlData) => {
@@ -174,33 +174,34 @@ export default function Home() {
                         <tbody>
                             {urls.map((url) => (
                                 <tr key={url.id} className='border-b'>
-                                    <td className='p-2 w-11/12 flex justify-end'>
-                                        <p className='text-blue-500'>
+                                    <td className='p-2 w-11/12 flex justify-end items-center'>
+                                        <p className='text-blue-500 hover:text-blue-700 transition-colors duration-300'>
                                             <a
                                                 href={`${url.originalUrl}`}
                                                 target='_blank'
                                                 rel='noopener noreferrer'
-                                                className='underline'>
+                                                className='underline hover:no-underline'>
                                                 {URL}/{url.shortUrl}
                                             </a>
                                         </p>
-                                        <div className='mx-2'>
+                                        <div className='mx-2 flex items-center'>
                                             <button
-                                                className='w-8 mx-4 bg-red-500' 
+                                                className='w-8 mx-4 bg-red-500 hover:bg-red-600 hover:scale-110 transition-transform duration-200 rounded-full p-1'
                                                 onClick={() =>
                                                     handleDelete(url.id)
                                                 }>
-                                               <RiDeleteBin5Line  className='text-white w-6 h-6'/>
-
+                                                <RiDeleteBin5Line className='text-white w-6 h-6' />
                                             </button>
                                             <button
-                                                className='w-8 bg-green-500'
+                                                className='w-8 bg-green-500 hover:bg-green-600 hover:scale-110 transition-transform duration-200 rounded-full p-1'
                                                 onClick={() => openModal(url)}>
-<GrUpdate  className='text-white w-6 h-6' />
-</button>
+                                                <GrUpdate className='text-white w-6 h-6' />
+                                            </button>
                                         </div>
                                     </td>
-                                    <td className='p-2'>{url.clickCount}</td>
+                                    <td className='p-2 text-center'>
+                                        {url.clickCount}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -259,5 +260,3 @@ export default function Home() {
         </div>
     );
 }
-
-
